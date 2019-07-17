@@ -21,8 +21,21 @@ class BankAccount():
     #These are class methods.
     @classmethod
     def create(cls):
-        cls.accounts.append(BankAccount())
-        return cls()
+        # cls.accounts.append(BankAccount())
+
+        # BankAccount.accounts.append(BankAccount())
+
+
+        
+        # cls.accounts.append(BankAccount())
+        # return BankAccount()
+        # return cls()
+
+
+        new_account = BankAccount()
+        cls.accounts.append(new_account)
+        return new_account
+
 
     @classmethod
     def total_funds(cls):
@@ -30,11 +43,20 @@ class BankAccount():
         print('\n TOTAL FUNDS')
 
         # print(len(cls.accounts)) #2
+        # print(cls.accounts[0].interest_rate)
 
 
-        for num in range(len(cls.accounts)):
+        # for num in range(len(cls.accounts)):
+        for num in cls.accounts:
+            print(num.balance)
+            # print(cls.accounts[num].balance)
+            our_total += num.balance
+            # pass
+
+
+
             # print(f'--{num}') #0, 1
-            print(cls.accounts[num]) #main BankAccount
+            # print(cls.accounts[num]) #main BankAccount
             # print(cls.accounts[num])
 
         # for account in len(cls.accounts):
@@ -44,6 +66,7 @@ class BankAccount():
             # print(cls.accounts[0].balance)
             # print(account.balance)
             # our_total += cls.accounts[account].balance
+            # pass
         
         return our_total
         
@@ -60,10 +83,15 @@ print('A')
 my_account = BankAccount.create()
 your_account = BankAccount.create()
 print(my_account.balance) # 0
-# print(BankAccount.total_funds()) # 0
+print(BankAccount.total_funds()) # 0
 print()
 
-print(my_account)
+
+# print(my_account)
+# print(your_account)
+# print(BankAccount.accounts)
+
+# print(BankAccount.accounts[0].balance)
 
 print('B - Balance Balance Total-Funds')
 my_account.deposit(200)
@@ -81,6 +109,6 @@ print('C')
 print()
 
 print('D')
-my_account.withdraw(50)
-print(my_account.balance) # 152.0
+# my_account.withdraw(50)
+# print(my_account.balance) # 152.0
 # print(BankAccount.total_funds()) # 1162.0
