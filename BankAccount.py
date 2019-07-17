@@ -72,9 +72,13 @@ class BankAccount():
         
     
 
-    # @classmethod
-    # def interest_time(cls):
-    #     our_total = 0
+    @classmethod
+    def interest_time(cls):
+        for num in cls.accounts:
+            print(num.interest_rate)
+            print(num.balance)
+            print(num.balance + (num.balance * num.interest_rate))
+            num.balance = num.balance + (num.balance * num.interest_rate)
 
 
 
@@ -102,13 +106,13 @@ print(BankAccount.total_funds()) # 1200
 print()
 
 print('C')
-# BankAccount.interest_time()
-# print(my_account.balance) # 202.0
-# print(your_account.balance) # 1010.0
-# print(BankAccount.total_funds()) # 1212.0
+BankAccount.interest_time()
+print(my_account.balance) # 202.0
+print(your_account.balance) # 1010.0
+print(BankAccount.total_funds()) # 1212.0
 print()
 
 print('D')
-# my_account.withdraw(50)
-# print(my_account.balance) # 152.0
-# print(BankAccount.total_funds()) # 1162.0
+my_account.withdraw(50)
+print(my_account.balance) # 152.0
+print(BankAccount.total_funds()) # 1162.0
