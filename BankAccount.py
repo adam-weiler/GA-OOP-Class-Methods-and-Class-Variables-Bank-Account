@@ -1,118 +1,56 @@
 class BankAccount():
 
-    #These are class variables.
+    #These are class variables. They are the same value for all accounts.
     interest_rate = .01
     accounts = []
 
 
-    def __init__(self, balance=0):
-        self.balance = balance #This is an instance variable.
-        # self.account_name = account_name
+    def __init__(self, owner_name, balance=0):
+        #These are instance variables. They need to be different from account to account.
+        self.owner_name = owner_name 
+        self.balance = balance 
 
 
-    def deposit(self, amount): #This is an instance method.
+    #These are magic methods.
+    def __str__(self): #Returns a meaningful string that describes the instance.
+        return f'{self.owner_name} bank account: {self.balance}'
+
+    def __repr__(self): #Returns a technical string that describes the instance.
+        return f'BankAccount instance:owner_name={self.owner_name} balance={self.balance}'
+
+
+    #These are instance methods. They pertain to a single, specific account.
+    def deposit(self, amount): #Adds the amount to this balance.
         self.balance += amount
+        return self.balance
 
-
-    def withdraw(self, amount): #This is an instance method.
+    def withdraw(self, amount): #Subtracts the amount from this balance.
         self.balance -= amount
+        return self.balance
 
 
-    #These are class methods.
+    #These are class methods. At the time we run it there is no single, specific account object that we are working on.
     @classmethod
-    def create(cls):
-        # cls.accounts.append(BankAccount())
-
-        # BankAccount.accounts.append(BankAccount())
-
-
-        
-        # cls.accounts.append(BankAccount())
-        # return BankAccount()
-        # return cls()
-
-
-        new_account = BankAccount()
+    def create(cls, owner_name): #Instantiates a new BankAccount class and appends it to the accounts list.
+        new_account = BankAccount(owner_name)
         cls.accounts.append(new_account)
         return new_account
 
-
     @classmethod
-    def total_funds(cls):
-        our_total = 0
-        print('\n TOTAL FUNDS')
+    def total_funds(cls): #Returns the sum of all bank_accounts' balances.
+        total_sum = 0
+        print('\n TOTAL FUNDS:')
 
-        # print(len(cls.accounts)) #2
-        # print(cls.accounts[0].interest_rate)
-
-
-        # for num in range(len(cls.accounts)):
-        for num in cls.accounts:
-            print(num.balance)
-            # print(cls.accounts[num].balance)
-            our_total += num.balance
-            # pass
-
-
-
-            # print(f'--{num}') #0, 1
-            # print(cls.accounts[num]) #main BankAccount
-            # print(cls.accounts[num])
-
-        # for account in len(cls.accounts):
-        #     print(type(cls.accounts[0].balance))        
-
-        # for account in cls.accounts:
-            # print(cls.accounts[0].balance)
+        for account in cls.accounts: #Iterates through every account in the accounts list.
             # print(account.balance)
-            # our_total += cls.accounts[account].balance
-            # pass
+            total_sum += account.balance
+                    
+        return total_sum
         
-        return our_total
-        
-    
-
     @classmethod
-    def interest_time(cls):
-        for num in cls.accounts:
-            print(num.interest_rate)
-            print(num.balance)
-            print(num.balance + (num.balance * num.interest_rate))
-            num.balance = num.balance + (num.balance * num.interest_rate)
-
-
-
-
-print('A')
-my_account = BankAccount.create()
-your_account = BankAccount.create()
-print(my_account.balance) # 0
-print(BankAccount.total_funds()) # 0
-print()
-
-
-# print(my_account)
-# print(your_account)
-# print(BankAccount.accounts)
-
-# print(BankAccount.accounts[0].balance)
-
-print('B - Balance Balance Total-Funds')
-my_account.deposit(200)
-your_account.deposit(1000)
-print(my_account.balance) # 200
-print(your_account.balance) # 1000
-print(BankAccount.total_funds()) # 1200
-print()
-
-print('C')
-BankAccount.interest_time()
-print(my_account.balance) # 202.0
-print(your_account.balance) # 1010.0
-print(BankAccount.total_funds()) # 1212.0
-print()
-
-print('D')
-my_account.withdraw(50)
-print(my_account.balance) # 152.0
-print(BankAccount.total_funds()) # 1162.0
+    def interest_time(cls): #Calculates and adds interest to every account based on interest_rate.
+        print('\n INTEREST TIME:')
+        for account in cls.accounts:
+            # print(f'{account.balance} @ {account.interest_rate} = {account.balance * account.interest_rate}')
+            account.balance += account.balance * account.interest_rate
+        return cls.accounts #Maybe?
