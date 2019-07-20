@@ -4,12 +4,10 @@ class BankAccount():
     interest_rate = .01
     accounts = []
 
-
-    def __init__(self, owner_name, balance=0):
+    def __init__(self, owner_name):
         #These are instance variables. They need to be different from account to account.
         self.owner_name = owner_name 
-        self.balance = balance 
-
+        self.balance = 0 
 
     #These are magic methods.
     def __str__(self): #Returns a meaningful string that describes the instance.
@@ -17,7 +15,6 @@ class BankAccount():
 
     def __repr__(self): #Returns a technical string that describes the instance.
         return f'BankAccount instance:owner_name={self.owner_name} balance={self.balance}'
-
 
     #These are instance methods. They pertain to a single, specific account.
     def deposit(self, amount): #Adds the amount to this balance.
@@ -27,7 +24,6 @@ class BankAccount():
     def withdraw(self, amount): #Subtracts the amount from this balance.
         self.balance -= amount
         return self.balance
-
 
     #These are class methods. At the time we run it there is no single, specific account object that we are working on.
     @classmethod
@@ -53,4 +49,4 @@ class BankAccount():
         for account in cls.accounts:
             # print(f'{account.balance} @ {account.interest_rate} = {account.balance * account.interest_rate}')
             account.balance += account.balance * account.interest_rate
-        return cls.accounts #Maybe?
+        return cls.accounts
